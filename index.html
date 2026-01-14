@@ -33,6 +33,175 @@
             overflow-x: hidden;
         }
 
+        /* Account Menu */
+        .account-menu {
+            position: absolute;
+            top: 70px;
+            right: 20px;
+            width: 280px;
+            background: rgba(26, 26, 46, 0.95);
+            backdrop-filter: blur(15px);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            z-index: 1001;
+            opacity: 0;
+            transform: translateY(-10px);
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .account-menu.active {
+            opacity: 1;
+            transform: translateY(0);
+            visibility: visible;
+        }
+
+        .account-header {
+            padding: 25px 25px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .account-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 600;
+            box-shadow: 0 5px 15px rgba(123, 67, 151, 0.4);
+        }
+
+        .account-info h3 {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+
+        .account-info p {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .account-status {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin-top: 5px;
+            font-size: 0.8rem;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: #4CAF50;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        .account-menu-list {
+            list-style: none;
+            padding: 15px 0;
+        }
+
+        .account-menu-item {
+            padding: 12px 25px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: var(--light);
+            text-decoration: none;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .account-menu-item:hover {
+            background: rgba(123, 67, 151, 0.2);
+        }
+
+        .account-menu-item i {
+            width: 20px;
+            text-align: center;
+            color: var(--gray);
+            font-size: 1.1rem;
+        }
+
+        .account-menu-item span {
+            flex: 1;
+        }
+
+        .account-menu-item.badge {
+            position: relative;
+        }
+
+        .account-badge {
+            background: var(--secondary);
+            color: white;
+            font-size: 0.7rem;
+            padding: 2px 8px;
+            border-radius: 10px;
+            margin-left: 10px;
+        }
+
+        .account-footer {
+            padding: 20px 25px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .account-stats {
+            display: flex;
+            gap: 15px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-weight: 600;
+            font-size: 1.1rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: var(--gray);
+        }
+
+        .logout-btn {
+            background: rgba(220, 36, 48, 0.2);
+            color: #ff6b6b;
+            border: 1px solid rgba(220, 36, 48, 0.3);
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .logout-btn:hover {
+            background: rgba(220, 36, 48, 0.3);
+            transform: translateY(-2px);
+        }
+
         /* Fullscreen Player */
         .fullscreen-player {
             position: fixed;
@@ -194,6 +363,11 @@
         .fullscreen-control-btn:hover {
             background: rgba(255, 255, 255, 0.1);
             transform: scale(1.1);
+        }
+
+        .fullscreen-control-btn.active {
+            color: var(--primary);
+            background: rgba(123, 67, 151, 0.2);
         }
 
         .fullscreen-play-btn {
@@ -542,6 +716,7 @@
             padding: 5px 10px;
             border-radius: 20px;
             transition: all 0.3s;
+            position: relative;
         }
 
         .user-profile:hover {
@@ -904,6 +1079,11 @@
             background: rgba(255, 255, 255, 0.1);
         }
 
+        .control-btn.active {
+            color: var(--primary);
+            background: rgba(123, 67, 151, 0.2);
+        }
+
         .play-pause-btn {
             background: var(--gradient);
             width: 45px;
@@ -1155,6 +1335,11 @@
             .fullscreen-song-title {
                 font-size: 2.5rem;
             }
+            
+            .account-menu {
+                width: 250px;
+                right: 10px;
+            }
         }
 
         @media (max-width: 768px) {
@@ -1230,6 +1415,21 @@
                 height: 60px;
                 font-size: 1.5rem;
             }
+            
+            .account-menu {
+                position: fixed;
+                top: auto;
+                bottom: var(--player-height);
+                left: 0;
+                right: 0;
+                width: 100%;
+                border-radius: 20px 20px 0 0;
+                transform: translateY(100%);
+            }
+            
+            .account-menu.active {
+                transform: translateY(0);
+            }
         }
 
         @media (max-width: 576px) {
@@ -1285,6 +1485,69 @@
     </style>
 </head>
 <body>
+    <!-- Account Menu -->
+    <div class="account-menu" id="accountMenu">
+        <div class="account-header">
+            <div class="account-avatar">U</div>
+            <div class="account-info">
+                <h3>User</h3>
+                <p>user@email.com</p>
+                <div class="account-status">
+                    <span class="status-dot"></span>
+                    <span>Online</span>
+                </div>
+            </div>
+        </div>
+        
+        <ul class="account-menu-list">
+            <li class="account-menu-item" id="profileBtn">
+                <i class="fas fa-user"></i>
+                <span>Profil Saya</span>
+            </li>
+            <li class="account-menu-item" id="settingsBtn">
+                <i class="fas fa-cog"></i>
+                <span>Pengaturan</span>
+            </li>
+            <li class="account-menu-item badge" id="premiumBtn">
+                <i class="fas fa-crown"></i>
+                <span>Suika Premium</span>
+                <span class="account-badge">PRO</span>
+            </li>
+            <li class="account-menu-item" id="playlistsBtn">
+                <i class="fas fa-music"></i>
+                <span>Daftar Putar Saya</span>
+            </li>
+            <li class="account-menu-item" id="downloadsBtn">
+                <i class="fas fa-download"></i>
+                <span>Download Saya</span>
+            </li>
+            <li class="account-menu-item" id="statsBtn">
+                <i class="fas fa-chart-line"></i>
+                <span>Statistik</span>
+            </li>
+        </ul>
+        
+        <div class="account-footer">
+            <div class="account-stats">
+                <div class="stat-item">
+                    <div class="stat-value">128</div>
+                    <div class="stat-label">Lagu</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">5</div>
+                    <div class="stat-label">Playlist</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">42h</div>
+                    <div class="stat-label">Dengar</div>
+                </div>
+            </div>
+            <button class="logout-btn" id="logoutBtn">
+                <i class="fas fa-sign-out-alt"></i>
+            </button>
+        </div>
+    </div>
+
     <!-- Fullscreen Player -->
     <div class="fullscreen-player" id="fullscreenPlayer">
         <button class="close-fullscreen" id="closeFullscreen">
@@ -1583,13 +1846,13 @@
     </div>
 
     <script>
-        // Library musik dengan lirik dummy
+        // Library musik dengan data lengkap
         const musicLibrary = [
-            {
+{
                 id: 1,
                 title: "Pyphone Marone",
                 artist: "Wiz Khalifa",
-                album: "Overxposed",
+                album: "Lagu Galau Atau Sad",
                 src: "https://raw.githubusercontent.com/SuikaRyp/Database/main/audio/1767964826794_Maroon_5_Payphone_ft_Wiz_Khalifa_Explicit_Official_Music_V.mp3",
                 img: "https://raw.githubusercontent.com/SuikaRyp/Database/main/images/1767964825961_image_1767964825961.jpg",
                 duration: "4:39",
@@ -1601,7 +1864,7 @@
                 id: 2,
                 title: "Serana",
                 artist: "For Revange",
-                album: "Perayaan Patah Hati",
+                album: "Lagu Galau Atau Sad",
                 src: "https://raw.githubusercontent.com/SuikaRyp/Database/main/audio/1767964874972_For_Revenge_-_Serana__Lyrics_.mp3",
                 img: "https://raw.githubusercontent.com/SuikaRyp/Database/main/images/1767964873546_image_1767964873546.jpg",
                 duration: "4:11",
@@ -1613,7 +1876,7 @@
                 id: 3,
                 title: "Seperti Bintang",
                 artist: "Ungu",
-                album: "When We All Fall Asleep, Where Do We Go?",
+                album: "Lagu Galau Atau Sad",
                 src: "https://raw.githubusercontent.com/SuikaRyp/Database/main/audio/1767964761629_Seperti_Bintang_-_Ungu.mp3",
                 img: "https://raw.githubusercontent.com/SuikaRyp/Database/main/images/1767964760668_image_1767964760668.jpg",
                 duration: "3:14",
@@ -1625,7 +1888,7 @@
                 id: 4,
                 title: "Karna Kamu",
                 artist: "Geisha",
-                album: "Future Nostalgia",
+                album: "Lagu Galau Atau Sad",
                 src: "https://raw.githubusercontent.com/SuikaRyp/Database/main/audio/1767964714765_aGSggATnKp0.mp3",
                 img: "https://raw.githubusercontent.com/SuikaRyp/Database/main/images/1767964713810_image_1767964713810.jpg",
                 duration: "3:55",
@@ -1637,7 +1900,7 @@
                 id: 5,
                 title: "Dj Mojang Priangan",
                 artist: "Nining Meida",
-                album: "F*CK LOVE 3",
+                album: "Lagu Dj Lagu Galau",
                 src: "https://raw.githubusercontent.com/SuikaRyp/Database/main/audio/1767964650391_killua_1762225827726_765k0k2z4p5.mp3",
                 img: "https://raw.githubusercontent.com/SuikaRyp/Database/main/images/1767964649722_image_1767964649722.jpg",
                 duration: "4:20",
@@ -1649,7 +1912,7 @@
                 id: 6,
                 title: "Kasih Aba Aba",
                 artist: "Tenxi",
-                album: "SOUR",
+                album: "Lagu Indo",
                 src: "https://raw.githubusercontent.com/SuikaRyp/Database/main/audio/1767964577425_Naykilla__Tenxi___Jemsii_-_Kasih_Aba-Aba__8D_AUDIO_.mp3",
                 img: "https://raw.githubusercontent.com/SuikaRyp/Database/main/images/1767964537376_image_1767964537376.jpg",
                 duration: "2:58",
@@ -1661,7 +1924,7 @@
                 id: 7,
                 title: "Bersamamu",
                 artist: "Viera",
-                album: "Dreamland",
+                album: "Lagu Galau Atau Sad",
                 src: "https://raw.githubusercontent.com/SuikaRyp/Database/main/audio/1767964425937_Vierra_-_Bersamamu__Official_Music_Video_.mp3",
                 img: "https://raw.githubusercontent.com/SuikaRyp/Database/main/images/1767964424986_image_1767964424986.jpg",
                 duration: "3:48",
@@ -1673,7 +1936,7 @@
                 id: 8,
                 title: "Monitor Ketua",
                 artist: "THENDO CHASTILO",
-                album: "MONTERO",
+                album: "Lagu Dj",
                 src: "https://raw.githubusercontent.com/SuikaRyp/Database/main/audio/1767964419383_THENDO_CHASTELO_-_TOR_MONITOR_KETUA.mp3",
                 img: "https://raw.githubusercontent.com/SuikaRyp/Database/main/images/1767964418474_image_1767964418474.jpg",
                 duration: "4:40",
@@ -1685,7 +1948,7 @@
                 id: 9,
                 title: "Battle Cry",
                 artist: "Jim Yosuf",
-                album: "Planet Her",
+                album: "Lagu Dj Lagu Galau",
                 src: "https://raw.githubusercontent.com/SuikaRyp/Database/main/audio/1767964362415_Jim_Yosef_-_BATTLECRY__Heart_of_Courage_.mp3",
                 img: "https://raw.githubusercontent.com/SuikaRyp/Database/main/images/1767964361787_image_1767964361787.jpg",
                 duration: "2:31",
@@ -1697,7 +1960,7 @@
                 id: 10,
                 title: "Luka Negara",
                 artist: "Fujita Haruka",
-                album: "After Hours",
+                album: "Lagu Galau Atau Sad",
                 src: "https://raw.githubusercontent.com/SuikaRyp/Database/main/audio/1767964298435_0g3xcm.mp3",
                 img: "https://raw.githubusercontent.com/SuikaRyp/Database/main/images/1767964296558_image_1767964296558.jpg",
                 duration: "4:23",
@@ -1709,7 +1972,7 @@
                 id: 11,
                 title: "Terbang Bersamaku",
                 artist: "Kangen Band",
-                album: "Butter",
+                album: "Kangen Band",
                 src: "https://raw.githubusercontent.com/SuikaRyp/Database/main/audio/1767964226050_Terbang_Bersamaku_-_Kangen_Band__Lyrics_.mp3",
                 img: "https://raw.githubusercontent.com/SuikaRyp/Database/main/images/1767964224270_image_1767964224270.jpg",
                 duration: "3:54",
@@ -1721,7 +1984,7 @@
                 id: 12,
                 title: "Jakarta Hari Ini",
                 artist: "For Revange",
-                album: "SOUR",
+                album: "Lagu Galau Atau Sad",
                 src: "https://raw.githubusercontent.com/SuikaRyp/Database/main/audio/1767964171599_For_Revenge_X_Stereo_Wall_Jakarta_Hari_Ini_Official_Video.mp3",
                 img: "https://raw.githubusercontent.com/SuikaRyp/Database/main/images/1767964170491_image_1767964170491.jpg",
                 duration: "3:35",
@@ -1733,7 +1996,7 @@
                 id: 13,
                 title: "Duka",
                 artist: "Last Child",
-                album: "MONTERO",
+                album: "Lagu Galau lagu Sad",
                 src: "https://raw.githubusercontent.com/SuikaRyp/Database/main/audio/1767964110075_Last_Child_-_Duka__Lyrics_.mp3",
                 img: "https://raw.githubusercontent.com/SuikaRyp/Database/main/images/1767964109009_image_1767964109009.jpg",
                 duration: "5:21",
@@ -1745,7 +2008,7 @@
                 id: 14,
                 title: "Bubrah",
                 artist: "Niken",
-                album: "",
+                album: "Lagu Jawa",
                 src: "https://raw.githubusercontent.com/SuikaRyp/Database/main/audio/1767965261884_Northsle_feat._Agiff_-_Bubrah__Official_Music_Video_.mp3",
                 img: "https://raw.githubusercontent.com/SuikaRyp/Database/main/images/1767965261247_image_1767965261247.jpg",
                 duration: "4:19",
@@ -1757,7 +2020,7 @@
                 id: 15,
                 title: "Pelanggaran",
                 artist: "Denny Caknan",
-                album: "Motion",
+                album: "Lagu Jawa",
                 src: "https://raw.githubusercontent.com/SuikaRyp/Database/main/audio/1767965282996_DENNY_CAKNAN_-_PELANGGARAN__OFFICIAL_LIVE_MUSIC_.mp3",
                 img: "https://raw.githubusercontent.com/SuikaRyp/Database/main/images/1767965260712_image_1767965260712.jpg",
                 duration: "5:24",
@@ -1769,7 +2032,7 @@
                 id: 16,
                 title: "Tresno Liyane",
                 artist: "Northsle",
-                album: "Uptown Special",
+                album: "Lagu Jawa",
                 src: "https://raw.githubusercontent.com/SuikaRyp/Database/main/audio/1767965219469_Tresno_liyane_NorthSle_Lirik_lagupengarepku_kowe_oleh_pengga.mp3",
                 img: "https://raw.githubusercontent.com/SuikaRyp/Database/main/images/1767965218947_image_1767965218947.jpg",
                 duration: "4:39",
@@ -1781,7 +2044,7 @@
                 id: 17,
                 title: "Korban Janji",
                 artist: "Guyon Weton",
-                album: "A Star Is Born Soundtrack",
+                album: "Lagu Jawa",
                 src: "https://raw.githubusercontent.com/SuikaRyp/Database/main/audio/1767965153441_GuyonWaton_Official_-_Korban_Janji__Official_Music_Video_.mp3",
                 img: "https://raw.githubusercontent.com/SuikaRyp/Database/main/images/1767965152229_image_1767965152229.jpg",
                 duration: "3:35",
@@ -1793,7 +2056,7 @@
                 id: 18,
                 title: "Kembali Bertahan",
                 artist: "Ungu",
-                album: "Happier",
+                album: "Lagu Jawa",
                 src: "https://raw.githubusercontent.com/SuikaRyp/Database/main/audio/1767965377984_Ungu_-__Kembali_Bertahan__OST_Satria_Garuda_Bima_X.mp3",
                 img: "https://raw.githubusercontent.com/SuikaRyp/Database/main/images/1767965376891_image_1767965376891.jpg",
                 duration: "4:15",
@@ -1805,7 +2068,7 @@
                 id: 19,
                 title: "Kisah Cinta Untuk Starla",
                 artist: "Virgun",
-                album: "The Kids Are Coming",
+                album: "Lagu Jawa",
                 src: "https://raw.githubusercontent.com/SuikaRyp/Database/main/audio/1767965455407_FocFked1TbQ.mp3",
                 img: "https://raw.githubusercontent.com/SuikaRyp/Database/main/images/1767965440419_image_1767965440419.jpg",
                 duration: "4:33",
@@ -1817,7 +2080,7 @@
                 id: 20,
                 title: "Be The One",
                 artist: "Tetsuya Dan Asakura",
-                album: "Savage Love (Laxed - Siren Beat)",
+                album: "Lagu Kamenrider",
                 src: "https://raw.githubusercontent.com/SuikaRyp/Database/main/audio/1767965492439_Be_The_One.mp3",
                 img: "https://raw.githubusercontent.com/SuikaRyp/Database/main/images/1767965491593_image_1767965491593.jpg",
                 duration: "3:58",
@@ -1829,7 +2092,7 @@
                 id: 21,
                 title: "Kelingan Mantan",
                 artist: "N.D.X AKA",
-                album: "21",
+                album: "Lagu Galau lagu Sad",
                 src: "https://raw.githubusercontent.com/SuikaRyp/Database/main/audio/1767965080214_EMOST_ART_-_NDX_A_K_A_Kelingan_Mantan.mp3",
                 img: "https://raw.githubusercontent.com/SuikaRyp/Database/main/images/1767965078851_image_1767965078851.jpg",
                 duration: "4:45",
@@ -1841,7 +2104,7 @@
                 id: 22,
                 title: "Sency",
                 artist: "Tenxi",
-                album: "Tenxi",
+                album: "Lagu Indo",
                 src: "https://raw.githubusercontent.com/SuikaRyp/Database/main/audio/1767965833026_dia_-_SENCY_ft._TENXI__Lyric_Video_.mp3",
                 img: "https://images.unsplash.com/photo-1498038432885-c6f3f1b912ee?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
                 duration: "2:33",
@@ -1853,7 +2116,7 @@
                 id: 23,
                 title: "Despacito",
                 artist: "Louis Fonsi",
-                album: "Unorthodox Jukebox",
+                album: "Lagu Penyemangat",
                 src: "https://raw.githubusercontent.com/SuikaRyp/Database/main/audio/1767961816203_Luis_Fonsi_-_Despacito_ft._Daddy_Yankee.mp3",
                 img: "https://raw.githubusercontent.com/SuikaRyp/Database/main/images/1767961831544_image_1767961831544.jpg",
                 duration: "4:42",
@@ -1864,8 +2127,8 @@
             {
                 id: 24,
                 title: "est c que tu meimes",
-                artist: "A Great Big World ft. Christina Aguilera",
-                album: "Is There Anybody Out There?",
+                artist: "Gims",
+                album: "Is",
                 src: "https://raw.githubusercontent.com/SuikaRyp/Database/main/audio/1767963395844_Ma_tre_Gims_-_Est-ce_que_tu_m_aimes____Clip_officiel_.mp3",
                 img: "https://raw.githubusercontent.com/SuikaRyp/Database/main/images/1767963395167_image_1767963395167.jpg",
                 duration: "4:02",
@@ -1877,7 +2140,7 @@
                 id: 25,
                 title: "Bintang Lima",
                 artist: "Tenxi",
-                album: "All the Little Lights",
+                album: "Lagu Dj Lagu Indo",
                 src: "https://raw.githubusercontent.com/SuikaRyp/Database/main/audio/1767963462551_Tenxi___Jemsii_-_Bintang_5__Official_Music_Video_Lyric_.mp3",
                 img: "https://raw.githubusercontent.com/SuikaRyp/Database/main/images/1767963461784_image_1767963461784.jpg",
                 duration: "4:04",
@@ -1889,7 +2152,7 @@
                 id: 26,
                 title: "Doa (Eiyu)",
                 artist: "Kairen",
-                album: "Doa Dan Harapan",
+                album: "Lagu Ultraman",
                 src: "https://raw.githubusercontent.com/SuikaRyp/Database/main/audio/1767963512796_ADFX0225_-_Ultraman_Nexus_opening__Doa-Eiyuu_.mp3",
                 img: "https://raw.githubusercontent.com/SuikaRyp/Database/main/images/1767963512350_image_1767963512350.jpg",
                 duration: "3:22",
@@ -1900,7 +2163,7 @@
                 id: 27,
                 title: "Aoi Kajitsu",
                 artist: "Shini Chiri Ohta",
-                album: "Tidak Ada Kata Menyerah",
+                album: "Lagu Ultraman",
                 src: "https://raw.githubusercontent.com/SuikaRyp/Database/main/audio/1767963556395_Ultra_Lyrics_Aoi_Kajitsu_Ultraman_Nexus_Junis_Blue_Opening_L.mp3",
                 img: "https://raw.githubusercontent.com/SuikaRyp/Database/main/images/1767963555296_image_1767963555296.jpg",
                 duration: "3:30",
@@ -1911,7 +2174,7 @@
                 id: 28,
                 title: "Orb Ni Nori",
                 artist: "Ultra Lyric",
-                album: "Dunia Itu Bulat Kita Pasti Akan Bertemu Kembali",
+                album: "Lagu Ultraman",
                 src: "https://raw.githubusercontent.com/SuikaRyp/Database/main/audio/1767963646799_Ultra_Lyrics_-_Orb_No_Inori__Ultraman_Orb_Opening__Lyrics.mp3",
                 img: "https://raw.githubusercontent.com/SuikaRyp/Database/main/images/1767963618506_image_1767963618506.jpg",
                 duration: "5:19",
@@ -1933,7 +2196,7 @@
                 id: 30,
                 title: "Take Me Higher",
                 artist: "Ultra Lyric",
-                album: "Cahaya Yang Datang Dari Kegelapan",
+                album: "Lagu Ultraman",
                 src: "https://raw.githubusercontent.com/SuikaRyp/Database/main/audio/1768009331189_RedPowerV_1962_House_of_Randomness_Ultraman_Tiga_Theme_Song_.mp3",
                 img: "https://raw.githubusercontent.com/SuikaRyp/Database/main/images/1768009263968_image_1768009263968.jpg",
                 duration: "5:09",
@@ -1944,7 +2207,7 @@
                 id: 31,
                 title: "Unite (Ending Ultraman X)",
                 artist: "Ultra Lyric",
-                album: "Pejuang Cahaya",
+                album: "Lagu Ultraman",
                 src: "https://raw.githubusercontent.com/SuikaRyp/Database/main/audio/1767963983413___MAD___Ultraman_X_The_Movie_-_Unite______.mp3",
                 img: "https://raw.githubusercontent.com/SuikaRyp/Database/main/images/1767963982564_image_1767963982564.jpg",
                 duration: "3:51",
@@ -1955,7 +2218,7 @@
                 id: 32,
                 title: "Multo",
                 artist: "Cup Of Joe",
-                album: "American IV: The Man Comes Around",
+                album: "Lagu Galau lagu Sad",
                 src: "https://raw.githubusercontent.com/SuikaRyp/Database/main/audio/1767966522635_Multo__Live_at_The_Cozy_Cove__-_Cup_of_Joe.mp3",
                 img: "https://raw.githubusercontent.com/SuikaRyp/Database/main/images/1767966679328_image_1767966679328.jpg",
                 duration: "4:05",
@@ -1966,7 +2229,7 @@
                 id: 33,
                 title: "Beggin",
                 artist: "Madcon",
-                album: "Rush",
+                album: "Lagu Dj Lagu Inggris",
                 src: "https://raw.githubusercontent.com/SuikaRyp/Database/main/audio/1767961557980_Testo_.mp3",
                 img: "https://raw.githubusercontent.com/SuikaRyp/Database/main/images/1767961740859_image_1767961740859.jpg",
                 duration: "3:31",
@@ -1977,7 +2240,7 @@
                 id: 34,
                 title: "Masih Disini",
                 artist: "Monsta",
-                album: "Pejuang Bumi",
+                album: "Lagu Penyemangat Lagu",
                 src: "https://raw.githubusercontent.com/SuikaRyp/Database/main/audio/1767963903363_Bunkface_-_Masih_Di_Sini__BoBoiBoy_The_Movie_OST_.mp3",
                 img: "https://raw.githubusercontent.com/SuikaRyp/Database/main/images/1767963902275_image_1767963902275.jpg",
                 duration: "4:14",
@@ -1988,7 +2251,7 @@
     id: 35,
     title: "She Will Be Loved",
     artist: "Marone 5",
-    album: "Single",
+    album: "Lagu Galau lagu Sad",
     src: "https://raw.githubusercontent.com/SuikaRyp/Loriyagami/main/audio/1768305914734_Maroon_5_-_She_Will_Be_Loved__Official_Music_Video_.mp3",
     img: "https://raw.githubusercontent.com/SuikaRyp/Loriyagami/main/images/1768305962986_image_1768305962986.jpg",
     duration: "3:58",
@@ -1999,7 +2262,7 @@
     id: 36,
     title: "Scott Street",
     artist: "Phoebe Bridgers",
-    album: "Stranger in the Alps",
+    album: "Lagu Galau lagu Sad",
     src: "https://raw.githubusercontent.com/SuikaRyp/Database/main/audio/1767967673363_Phoebe_Bridgers_-_Scott_Street__Official_Video_.mp3",
     img: "https://raw.githubusercontent.com/SuikaRyp/Database/main/images/1767967659071_image_1767967659071.jpg",
     duration: "5:05",
@@ -2010,7 +2273,7 @@
     id: 37,
     title: "The Night We Met",
     artist: "Lord Huron",
-    album: "Strange Trails",
+    album: "Lagu Galau lagu Sad",
     src: "https://raw.githubusercontent.com/SuikaRyp/Database/main/audio/1767967768575_Lord_Huron_-_The_Night_We_Met__Official_Audio_.mp3",
     img: "https://raw.githubusercontent.com/SuikaRyp/Database/main/images/1767967753821_image_1767967753821.jpg",
     duration: "3:28",
@@ -2021,7 +2284,7 @@
     id: 38,
     title: "lost myself 4 u",
     artist: "Thomas Day",
-    album: "love me for another day",
+    album: "Lagu Galau lagu Sad",
     src: "https://raw.githubusercontent.com/SuikaRyp/Database/main/audio/1767967807599_Thomas_Day_-_lost_myself_4_u__Official_Video_.mp3",
     img: "https://raw.githubusercontent.com/SuikaRyp/Database/main/images/1767967833458_image_1767967833458.jpg",
     duration: "3:53",
@@ -2032,7 +2295,7 @@
     id: 39,
     title: "About You",
     artist: "The 1975",
-    album: "Being Funny in a Foreign Language",
+    album: "Lagu Galau lagu Sad",
     src: "https://raw.githubusercontent.com/SuikaRyp/Database/main/audio/1767967938755_The_1975_-_youtube_video__tGv7CUutzqU.mp3",
     img: "https://raw.githubusercontent.com/SuikaRyp/Database/main/images/1767967943339_image_1767967943339.jpg",
     duration: "5:27",
@@ -2043,7 +2306,7 @@
     id: 40,
     title: "When I Was Your Man",
     artist: "Bruno Mars",
-    album: "Unorthodox Jukebox",
+    album: "Lagu Galau lagu Sad",
     src: "https://raw.githubusercontent.com/SuikaRyp/Database/main/audio/1767968035817_Bruno_Mars_-_When_I_Was_Your_Man.mp3",
     img: "https://raw.githubusercontent.com/SuikaRyp/Database/main/images/1767968064982_image_1767968064982.jpg",
     duration: "3:34",
@@ -2054,7 +2317,7 @@
     id: 41,
     title: "A Sorrowful Reunion",
     artist: "Reality Club",
-    album: "What Do You Really Know?",
+    album: "Lagu Galau lagu Sad",
     src: "https://raw.githubusercontent.com/SuikaRyp/Database/main/audio/1767968156470_A_Sorrowful_Reunion_-_Reality_Club__Official_Lyric_Video_.mp3",
     img: "https://raw.githubusercontent.com/SuikaRyp/Database/main/images/1767968131606_image_1767968131606.jpg",
     duration: "4:25",
@@ -2065,7 +2328,7 @@
     id: 42,
     title: "The Scientist",
     artist: "Coldplay",
-    album: "A Rush of Blood to the Head",
+    album: "Lagu Galau lagu Sad",
     src: "https://raw.githubusercontent.com/SuikaRyp/Database/main/audio/1767968249555_RB-RcX5DS5A.mp3",
     img: "https://raw.githubusercontent.com/SuikaRyp/Database/main/images/1767968277688_image_1767968277688.jpg",
     duration: "4:25",
@@ -2076,7 +2339,7 @@
     id: 43,
     title: "All I Ask",
     artist: "Adele",
-    album: "25",
+    album: "Lagu Galau lagu Sad",
     src: "https://raw.githubusercontent.com/SuikaRyp/Database/main/audio/1768005729941_All_I_Ask_-_Adele__Lyrics_.mp3",
     img: "https://raw.githubusercontent.com/SuikaRyp/Database/main/images/1768005932771_image_1768005932771.jpg",
     duration: "4:31",
@@ -2087,7 +2350,7 @@
     id: 44,
     title: "Stay",
     artist: "Jt5k",
-    album: "Stay",
+    album: "Lagu Galau lagu Sad",
     src: "https://raw.githubusercontent.com/SuikaRyp/Database/main/audio/1768006025408_The_Kid_LAROI__Justin_Bieber_-_STAY__Official_Video_.mp3",
     img: "https://raw.githubusercontent.com/SuikaRyp/Database/main/images/1768006031871_image_1768006031871.jpg",
     duration: "2:46",
@@ -2098,7 +2361,7 @@
     id: 45,
     title: "Kimi Dake O Mamoritai",
     artist: "Asuka",
-    album: "Moonchild",
+    album: "Lagu Ultraman",
     src: "https://raw.githubusercontent.com/SuikaRyp/Database/main/audio/1768009397745__Kimi_Dake_wo_Mamoritai__Ultraman_Dyna_ending_song_-_lyrics.mp3",
     img: "https://raw.githubusercontent.com/SuikaRyp/Database/main/images/1768009431975_image_1768009431975.jpg",
     duration: "3:40",
@@ -2109,7 +2372,7 @@
     id: 46,
     title: "WILDFLOWER",
     artist: "Billie Eilish",
-    album: "HIT ME HARD AND SOFT",
+    album: "Lagu Galau lagu Sad",
     src: "https://raw.githubusercontent.com/SuikaRyp/Database/main/audio/1768006158166_Billie_Eilish_-_WILDFLOWER__Karaoke_Version_.mp3",
     img: "https://raw.githubusercontent.com/SuikaRyp/Database/main/images/1768006213314_image_1768006213314.jpg",
     duration: "4:21",
@@ -2120,7 +2383,7 @@
     id: 47,
     title: "back to friends",
     artist: "sombr",
-    album: "back to friends",
+    album: "Lagu Galau lagu Sad",
     src: "https://raw.githubusercontent.com/SuikaRyp/Database/main/audio/1768006255576_sombr_-_back_to_friends__official_audio_.mp3",
     img: "https://raw.githubusercontent.com/SuikaRyp/Database/main/images/1768006264367_image_1768006264367.jpg",
     duration: "3:08",
@@ -2351,7 +2614,7 @@
     id: 68,
     title: "Yank",
     artist: "Wali Band",
-    album: "Wali Band",
+    album: "Lagu Jawa Wali Band",
     src: "https://raw.githubusercontent.com/SuikaRyp/Loriyagami/main/audio/1768306812713_Wali_Band_-_Yank__Official_Music_Video_NAGASWARA___music.mp3",
     img: "https://raw.githubusercontent.com/SuikaRyp/Loriyagami/main/images/1768306853615_image_1768306853615.jpg",
     duration: "3:45",
@@ -2384,7 +2647,7 @@
     id: 71,
     title: "Memories",
     artist: "Maroon 5",
-    album: "Jordi",
+    album: "Lagu Galau lagu Sad",
     src: "https://raw.githubusercontent.com/SuikaRyp/Loriyagami/main/audio/1768306599096_Maroon_5_-_Memories__Official_Video_.mp3",
     img: "https://raw.githubusercontent.com/SuikaRyp/Loriyagami/main/images/1768306661820_image_1768306661820.jpg",
     duration: "3:09",
@@ -2395,7 +2658,7 @@
     id: 72,
     title: "Faded",
     artist: "Alan Walker",
-    album: "Different World",
+    album: "Lagu Galau lagu Sad",
     src: "https://raw.githubusercontent.com/SuikaRyp/Loriyagami/main/audio/1768307469211_Alan_Walker_-_Faded__Lyrics_.mp3",
     img: "https://raw.githubusercontent.com/SuikaRyp/Loriyagami/main/images/1768307497276_image_1768307497276.jpg",
     duration: "3:32",
@@ -2406,7 +2669,7 @@
     id: 73,
     title: "Legend Of Galaxy",
     artist: "Takamiya",
-    album: "Gingga",
+    album: "Lagu Galau lagu Sad",
     src: "https://raw.githubusercontent.com/SuikaRyp/Loriyagami/main/audio/1768367281381_Takamiy_-_Topic_-_Legend_of_Galaxy.mp3",
     img: "https://raw.githubusercontent.com/SuikaRyp/Loriyagami/main/images/1768367341190_image_1768367341190.jpg",
     duration: "5:54",
@@ -2417,7 +2680,7 @@
     id: 74,
     title: "Sing Me To Sleep",
     artist: "Alan Walker",
-    album: "Different World",
+    album: "Lagu Galau lagu Sad",
     src: "https://raw.githubusercontent.com/SuikaRyp/Loriyagami/main/audio/1768367457424_Alan_Walker_-_Sing_Me_To_Sleep__Lyrics_.mp3",
     img: "https://raw.githubusercontent.com/SuikaRyp/Loriyagami/main/images/1768367464163_image_1768367464163.jpg",
     duration: "3:07",
@@ -2428,7 +2691,7 @@
     id: 75,
     title: "Darkside",
     artist: "Alan Walker",
-    album: "Different World",
+    album: "Lagu Galau lagu Sad",
     src: "https://raw.githubusercontent.com/SuikaRyp/Loriyagami/main/audio/1768367517375_NEONI_-_Darkside__Lyrics_.mp3",
     img: "https://raw.githubusercontent.com/SuikaRyp/Loriyagami/main/images/1768367543189_image_1768367543189.jpg",
     duration: "3:31",
@@ -2439,7 +2702,7 @@
     id: 76,
     title: "The Spectre",
     artist: "Alan Walker",
-    album: "Different World",
+    album: "Lagu Galau lagu Sad",
     src: "https://raw.githubusercontent.com/SuikaRyp/Loriyagami/main/audio/1768367589781_Alan_Walker_-_The_Spectre.mp3",
     img: "https://raw.githubusercontent.com/SuikaRyp/Loriyagami/main/images/1768367597471_image_1768367597471.jpg",
     duration: "3:13",
@@ -2461,7 +2724,7 @@
     id: 78,
     title: "All Falls Down",
     artist: "Alan Walker",
-    album: "Different World",
+    album: "Diff",
     src: "https://raw.githubusercontent.com/SuikaRyp/Loriyagami/main/audio/1768367703713_Alan_Walker_All_Falls_Down_feat_Noah_Cyrus_with_Digital_Farm.mp3",
     img: "https://raw.githubusercontent.com/SuikaRyp/Loriyagami/main/images/1768367710102_image_1768367710102.jpg",
     duration: "3:19",
@@ -2472,7 +2735,7 @@
     id: 79,
     title: "ending ultraman cosmos",
     artist: "tsuburasa",
-    album: "Different World",
+    album: "Lagu Ultraman",
     src: "https://raw.githubusercontent.com/SuikaRyp/Loriyagami/main/audio/1768368010288_killua_1762175195316_cc443gq4ljq.mp3",
     img: "https://raw.githubusercontent.com/SuikaRyp/Loriyagami/main/images/1768368023593_image_1768368023593.jpg",
     duration: "5:00",
@@ -2484,8 +2747,8 @@
     title: "Lily",
     artist: "Alan Walker",
     album: "Different World",
-    src: "URL_MP3_LILY",
-    img: "URL_IMG_ALANWALKER",
+    src: "https://raw.githubusercontent.com/SuikaRyp/Loriyagami/main/audio/1768389808700_ox4tmEV6-QU.mp3",
+    img: "https://raw.githubusercontent.com/SuikaRyp/Loriyagami/main/images/1768389907628_image_1768389907628.jpg",
     duration: "3:15",
     category: "sad",
     popular: true
@@ -2494,9 +2757,9 @@
     id: 81,
     title: "Baby",
     artist: "Justin Bieber",
-    album: "My World 2.0",
-    src: "URL_MP3_BABY",
-    img: "URL_IMG_JUSTIN_BIEBER",
+    album: "Lagu Galau Atau Sad",
+    src: "https://raw.githubusercontent.com/SuikaRyp/Loriyagami/main/audio/1768389990115_Justin_Bieber_-_Baby_ft._Ludacris.mp3",
+    img: "https://raw.githubusercontent.com/SuikaRyp/Loriyagami/main/images/1768389983196_image_1768389983196.jpg",
     duration: "3:36",
     category: "happy",
     popular: true
@@ -2505,9 +2768,9 @@
     id: 82,
     title: "Sorry",
     artist: "Justin Bieber",
-    album: "Purpose",
-    src: "URL_MP3_SORRY",
-    img: "URL_IMG_JUSTIN_BIEBER",
+    album: "Lagu Galau Atau Sad",
+    src: "https://raw.githubusercontent.com/SuikaRyp/Loriyagami/main/audio/1768390150884_Justin_Bieber_-_Sorry__PURPOSE___The_Movement_.mp3",
+    img: "https://raw.githubusercontent.com/SuikaRyp/Loriyagami/main/images/1768390183608_image_1768390183608.jpg",
     duration: "3:20",
     category: "dance",
     popular: true
@@ -2516,9 +2779,9 @@
     id: 83,
     title: "Love Yourself",
     artist: "Justin Bieber",
-    album: "Purpose",
-    src: "URL_MP3_LOVEYOURSELF",
-    img: "URL_IMG_JUSTIN_BIEBER",
+    album: "Justin Bieber",
+    src: "https://raw.githubusercontent.com/SuikaRyp/Loriyagami/main/audio/1768390230057_Justin_Bieber_-_Love_Yourself__Lyrics_.mp3",
+    img: "https://raw.githubusercontent.com/SuikaRyp/Loriyagami/main/images/1768391909255_image_1768391909255.jpg",
     duration: "3:53",
     category: "sad",
     popular: true
@@ -2527,9 +2790,9 @@
     id: 84,
     title: "What Do You Mean?",
     artist: "Justin Bieber",
-    album: "Purpose",
-    src: "URL_MP3_WHATDOYOUMEAN",
-    img: "URL_IMG_JUSTIN_BIEBER",
+    album: "Justin Bieber",
+    src: "https://raw.githubusercontent.com/SuikaRyp/Loriyagami/main/audio/1768390360045_Justin_Bieber_-_What_Do_You_Mean.mp3",
+    img: "https://raw.githubusercontent.com/SuikaRyp/Loriyagami/main/images/1768390390753_image_1768390390753.jpg",
     duration: "3:25",
     category: "pop",
     popular: true
@@ -2538,9 +2801,9 @@
     id: 85,
     title: "Yummy",
     artist: "Justin Bieber",
-    album: "Changes",
-    src: "URL_MP3_YUMMY",
-    img: "URL_IMG_JUSTIN_BIEBER",
+    album: "Justin Bieber",
+    src: "https://raw.githubusercontent.com/SuikaRyp/Loriyagami/main/audio/1768391513627_Justin_Bieber_-_Yummy__Official_Video_.mp3",
+    img: "https://raw.githubusercontent.com/SuikaRyp/Loriyagami/main/images/1768391520069_image_1768391520069.jpg",
     duration: "3:30",
     category: "chill",
     popular: true
@@ -2550,8 +2813,8 @@
     title: "Peaches",
     artist: "Justin Bieber",
     album: "Justice",
-    src: "URL_MP3_PEACHES",
-    img: "URL_IMG_JUSTIN_BIEBER",
+    src: "https://raw.githubusercontent.com/SuikaRyp/Loriyagami/main/audio/1768391662412_Peaches_-__Boys_Wanna_Be_Her__Official_Music_Video.mp3",
+    img: "https://raw.githubusercontent.com/SuikaRyp/Loriyagami/main/images/1768391649900_image_1768391649900.jpg",
     duration: "3:18",
     category: "chill",
     popular: true
@@ -2560,9 +2823,9 @@
     id: 87,
     title: "Ghost",
     artist: "Justin Bieber",
-    album: "Justice",
-    src: "URL_MP3_GHOST",
-    img: "URL_IMG_JUSTIN_BIEBER",
+    album: "justin bieber Lagu Sad",
+    src: "https://raw.githubusercontent.com/SuikaRyp/Loriyagami/main/images/1768391717087_image_1768391717087.jpg",
+    img: "https://raw.githubusercontent.com/SuikaRyp/Loriyagami/main/images/1768392003508_image_1768392003508.jpg",
     duration: "2:33",
     category: "sad",
     popular: true
@@ -2571,9 +2834,9 @@
     id: 88,
     title: "As Long As You Love Me",
     artist: "Justin Bieber",
-    album: "Believe",
-    src: "URL_MP3_ASLONGASYOULOVEME",
-    img: "URL_IMG_JUSTIN_BIEBER",
+    album: "Lagu Romantis Justin Bieber biber",
+    src: "https://raw.githubusercontent.com/SuikaRyp/Loriyagami/main/images/1768391786481_image_1768391786481.jpg",
+    img: "https://raw.githubusercontent.com/SuikaRyp/Loriyagami/main/images/1768391786481_image_1768391786481.jpg",
     duration: "3:49",
     category: "romance",
     popular: true
@@ -2582,9 +2845,9 @@
     id: 89,
     title: "Boyfriend",
     artist: "Justin Bieber",
-    album: "Believe",
-    src: "URL_MP3_BOYFRIEND",
-    img: "URL_IMG_JUSTIN_BIEBER",
+    album: "justin bieber",
+    src: "https://raw.githubusercontent.com/SuikaRyp/Loriyagami/main/audio/1768397998030_Dove_Cameron_-_Boyfriend__Lyrics_.mp3",
+    img: "https://raw.githubusercontent.com/SuikaRyp/Loriyagami/main/images/1768397978306_image_1768397978306.jpg",
     duration: "2:51",
     category: "pop",
     popular: true
@@ -2593,10 +2856,197 @@
     id: 90,
     title: "Intentions",
     artist: "Justin Bieber",
-    album: "Changes",
-    src: "URL_MP3_INTENTIONS",
-    img: "URL_IMG_JUSTIN_BIEBER",
+    album: "justin bieber",
+    src: "https://raw.githubusercontent.com/SuikaRyp/Loriyagami/main/audio/1768398092516_Dove_Cameron_-_Boyfriend__Lyrics_.mp3",
+    img: "https://raw.githubusercontent.com/SuikaRyp/Loriyagami/main/images/1768398068461_image_1768398068461.jpg",
     duration: "3:32",
+    category: "romance",
+    popular: true
+},
+{
+    id: 91,
+    title: "Ojo Dibandingke",
+    artist: "Denny Caknan",
+    album: "Lagu Jawa",
+    src: "https://raw.githubusercontent.com/SuikaRyp/Loriyagami/main/audio/1768398140560_Farel_Prayoga_Ojo_Di_Bandingke_Official_Music_Video_ANEKA_SAF.mp3",
+    img: "https://raw.githubusercontent.com/SuikaRyp/Loriyagami/main/images/1768398149843_image_1768398149843.jpg",
+    duration: "5:12",
+    category: "sad",
+    popular: true
+},
+{
+    id: 92,
+    title: "Kartonyono Medot Janji",
+    artist: "Denny Caknan",
+    album: "Lagu Jawa",
+    src: "https://raw.githubusercontent.com/SuikaRyp/Loriyagami/main/audio/1768398216011_Denny_Caknan_-_Kartonyono_Medot_Janji__Official_Music_Video_.mp3",
+    img: "https://raw.githubusercontent.com/SuikaRyp/Loriyagami/main/images/1768398224041_image_1768398224041.jpg",
+    duration: "5:05",
+    category: "sad",
+    popular: true
+},
+{
+    id: 93,
+    title: "Loss Dol",
+    artist: "Denny Caknan",
+    album: "Lagu Jawa",
+    src: "https://raw.githubusercontent.com/SuikaRyp/Loriyagami/main/audio/1768398296000_Denny_Caknan_-_LOS_DOL__Official_Music_Video_.mp3",
+    img: "https://raw.githubusercontent.com/SuikaRyp/Loriyagami/main/images/1768398307448_image_1768398307448.jpg",
+    duration: "4:40",
+    category: "happy",
+    popular: true
+},
+{
+    id: 94,
+    title: "Rungkad",
+    artist: "Happy Asmara",
+    album: "Single",
+    src: "https://raw.githubusercontent.com/SuikaRyp/Loriyagami/main/audio/1768398423342_HAPPY_ASMARA_FEAT_THE_SAXOBROTHERS_RUNGKAD_Official_Music_Vid.mp3",
+    img: "https://raw.githubusercontent.com/SuikaRyp/Loriyagami/main/images/1768398428709_image_1768398428709.jpg",
+    duration: "5:43",
+    category: "sad",
+    popular: true
+},
+{
+    id: 95,
+    title: "Wes Tatas",
+    artist: "Happy Asmara",
+    album: "Single",
+    src: "https://raw.githubusercontent.com/SuikaRyp/Loriyagami/main/audio/1768398477313_HAPPY_ASMARA_-_WES_TATAS__Official_Live_Music_Video_.mp3",
+    img: "https://raw.githubusercontent.com/SuikaRyp/Loriyagami/main/images/1768398484967_image_1768398484967.jpg",
+    duration: "4:58",
+    category: "sad",
+    popular: true
+},
+{
+    id: 96,
+    title: "Kuat Ati",
+    artist: "Happy Asmara",
+    album: "lagu jawa",
+    src: "https://raw.githubusercontent.com/SuikaRyp/Loriyagami/main/audio/1768398556340_Happy_Asmara_-_Kuat_Ati__Official_Music_Video_ANEKA_SAFARI_.mp3",
+    img: "https://raw.githubusercontent.com/SuikaRyp/Loriyagami/main/images/1768398535502_image_1768398535502.jpg",
+    duration: "4:46",
+    category: "sad",
+    popular: true
+},
+{
+    id: 97,
+    title: "Iso Tanpo Koe",
+    artist: "Happy Asmara",
+    album: "Lagu Jawa",
+    src: "https://raw.githubusercontent.com/SuikaRyp/Loriyagami/main/audio/1768398827697_DENNY_CAKNAN_-_ISO_TANPO_KOWE__OFFICIAL_LIVE_MUSIC_.mp3",
+    img: "https://raw.githubusercontent.com/SuikaRyp/Loriyagami/main/images/1768398853909_image_1768398853909.jpg",
+    duration: "5:01",
+    category: "sad",
+    popular: true
+},
+{
+    id: 98,
+    title: "Cerito Loro",
+    artist: "Happy Asmara",
+    album: "Lagu Jawa",
+    src: "https://raw.githubusercontent.com/SuikaRyp/Loriyagami/main/audio/1768398897937_Woro_Widowati_-_Cerito_Loro__Official_Music_Video_.mp3",
+    img: "https://raw.githubusercontent.com/SuikaRyp/Loriyagami/main/images/1768398903791_image_1768398903791.jpg",
+    duration: "4:55",
+    category: "sad",
+    popular: false
+},
+{
+    id: 99,
+    title: "Lungamu Ninggal Kenangan",
+    artist: "Syahiba Shaufa",
+    album: "Lagu Jawa",
+    src: "https://raw.githubusercontent.com/SuikaRyp/Loriyagami/main/audio/1768398977516_Syahiba_Saufa_-_Lungamu_Ninggal_Kenangan.mp3",
+    img: "https://raw.githubusercontent.com/SuikaRyp/Loriyagami/main/images/1768399069369_image_1768399069369.jpg",
+    duration: "4:49",
+    category: "sad",
+    popular: true
+},
+{
+    id: 100,
+    title: "Aku Bukan Jodohnya",
+    artist: "Yeni Inka",
+    album: "Lagu Jawa",
+    src: "https://raw.githubusercontent.com/SuikaRyp/Loriyagami/main/audio/1768399117689_Tri_Suaka_-_Aku_Bukan_Jodohnya__Official_Music_Video_.mp3",
+    img: "https://raw.githubusercontent.com/SuikaRyp/Loriyagami/main/images/1768399129315_image_1768399129315.jpg",
+    duration: "5:09",
+    category: "sad",
+    popular: true
+},
+{
+    id: 101,
+    title: "Mendung Tanpo Udan",
+    artist: "Ndarboy Genk",
+    album: "lagu jawa",
+    src: "https://raw.githubusercontent.com/SuikaRyp/Loriyagami/main/audio/1768399332235_Ndarboy_Genk_Mendung_Tanpo_Udan_Official_Music_Video_Versi_D.mp3",
+    img: "https://raw.githubusercontent.com/SuikaRyp/Loriyagami/main/images/1768399332686_image_1768399332686.jpg",
+    duration: "4:59",
+    category: "sad",
+    popular: true
+},
+{
+    id: 102,
+    title: "Ojo Nangis",
+    artist: "Ndarboy Genk feat. Denny Caknan",
+    album: "lagu jawa",
+    src: "https://raw.githubusercontent.com/SuikaRyp/Loriyagami/main/audio/1768399389682_HAPPY_ASMARA_-_OJO_NANGIS__Official_Live_Music_Video_.mp3",
+    img: "https://raw.githubusercontent.com/SuikaRyp/Loriyagami/main/images/1768399390568_image_1768399390568.jpg",
+    duration: "4:45",
+    category: "sad",
+    popular: true
+},
+{
+    id: 103,
+    title: "Sanes",
+    artist: "Guyon Waton",
+    album: "lagu jawa",
+    src: "https://raw.githubusercontent.com/SuikaRyp/Loriyagami/main/audio/1768399505275_GuyonWaton_x_Denny_Caknan_-_SANES__Official_Music_Video_.mp3",
+    img: "https://raw.githubusercontent.com/SuikaRyp/Loriyagami/main/images/1768399505790_image_1768399505790.jpg",
+    duration: "5:00",
+    category: "sad",
+    popular: true
+},
+{
+    id: 104,
+    title: "Dalan Liyane",
+    artist: "Guyon Waton",
+    album: "Lagu Jawa",
+    src: "https://raw.githubusercontent.com/SuikaRyp/Loriyagami/main/audio/1768399588364_Happy_Asmara_Dalan_Liyane_Official_Music_Video_ANEKA_SAFARI.mp3",
+    img: "https://raw.githubusercontent.com/SuikaRyp/Loriyagami/main/images/1768399592709_image_1768399592709.jpg",
+    duration: "4:52",
+    category: "sad",
+    popular: true
+},
+{
+    id: 105,
+    title: "Prau Layar",
+    artist: "Nella Kharisma",
+    album: "lagu jawa",
+    src: "https://raw.githubusercontent.com/SuikaRyp/Loriyagami/main/audio/1768399679238_Nella_Kharisma_-_Prau_Layar.mp3",
+    img: "https://raw.githubusercontent.com/SuikaRyp/Loriyagami/main/images/1768399704227_image_1768399704227.jpg",
+    duration: "4:33",
+    category: "happy",
+    popular: true
+},
+{
+    id: 106,
+    title: "Boso Moto",
+    artist: "Suliana",
+    album: "Lagu Jawa",
+    src: "https://raw.githubusercontent.com/SuikaRyp/Loriyagami/main/audio/1768399776952_Suliyana_-_Bohoso_Moto__Official_Music_Video_.mp3",
+    img: "https://raw.githubusercontent.com/SuikaRyp/Loriyagami/main/images/1768399781274_image_1768399781274.jpg",
+    duration: "4:41",
+    category: "sad",
+    popular: true
+},
+{
+    id: 107,
+    title: "Tali Asmoro",
+    artist: "NDX AKA",
+    album: "Lagu Jawa",
+    src: "https://raw.githubusercontent.com/SuikaRyp/Loriyagami/main/audio/1768399960428_NDX_A.K.A_-_TALINING_ASMORO.mp3",
+    img: "https://raw.githubusercontent.com/SuikaRyp/Loriyagami/main/images/1768400026293_image_1768400026293.jpg",
+    duration: "5:06",
     category: "romance",
     popular: true
 }
@@ -2606,6 +3056,7 @@
         // Local Storage untuk riwayat
         const HISTORY_KEY = 'music_player_history';
         const RECENT_PLAYS_KEY = 'music_player_recent';
+        const USER_DATA_KEY = 'suika_player_user';
         
         // Elemen DOM
         const audio = new Audio();
@@ -2630,6 +3081,17 @@
         const historyContent = document.getElementById('historyContent');
         const clearHistoryBtn = document.getElementById('clearHistoryBtn');
         const historyBtns = document.querySelectorAll('.history-btn');
+        
+        // Account menu elements
+        const accountMenu = document.getElementById('accountMenu');
+        const userProfile = document.getElementById('userProfile');
+        const profileBtn = document.getElementById('profileBtn');
+        const settingsBtn = document.getElementById('settingsBtn');
+        const premiumBtn = document.getElementById('premiumBtn');
+        const playlistsBtn = document.getElementById('playlistsBtn');
+        const downloadsBtn = document.getElementById('downloadsBtn');
+        const statsBtn = document.getElementById('statsBtn');
+        const logoutBtn = document.getElementById('logoutBtn');
         
         // Fullscreen player elements
         const fullscreenPlayer = document.getElementById('fullscreenPlayer');
@@ -2690,6 +3152,15 @@
         let listenHistory = [];
         let recentPlays = [];
         let clickTimers = {};
+        let userData = {
+            name: "User",
+            email: "user@email.com",
+            stats: {
+                songsPlayed: 128,
+                playlists: 5,
+                listeningTime: "42h"
+            }
+        };
 
         // Inisialisasi aplikasi
         function initApp() {
@@ -2711,6 +3182,9 @@
             
             // Set lagu pertama
             loadSong(currentSongIndex);
+            
+            // Update user data
+            updateUserData();
             
             // Event listeners
             setupEventListeners();
@@ -2746,16 +3220,88 @@
                     .map(song => ({...song, playedAt: new Date().toISOString()}));
                 saveToLocalStorage();
             }
+            
+            // Load user data
+            const savedUserData = localStorage.getItem(USER_DATA_KEY);
+            if (savedUserData) {
+                userData = JSON.parse(savedUserData);
+            }
         }
         
         // Save data ke localStorage
         function saveToLocalStorage() {
             localStorage.setItem(HISTORY_KEY, JSON.stringify(listenHistory));
             localStorage.setItem(RECENT_PLAYS_KEY, JSON.stringify(recentPlays));
+            localStorage.setItem(USER_DATA_KEY, JSON.stringify(userData));
+        }
+        
+        // Update user data display
+        function updateUserData() {
+            // Update stats
+            document.querySelectorAll('.stat-value')[0].textContent = userData.stats.songsPlayed;
+            document.querySelectorAll('.stat-value')[1].textContent = userData.stats.playlists;
+            document.querySelectorAll('.stat-value')[2].textContent = userData.stats.listeningTime;
+            
+            // Update user name
+            document.querySelector('.user-name').textContent = userData.name;
+            document.querySelector('.account-info h3').textContent = userData.name;
+            document.querySelector('.account-info p').textContent = userData.email;
+            
+            // Update avatar initial
+            document.querySelector('.user-avatar').textContent = userData.name.charAt(0);
+            document.querySelector('.account-avatar').textContent = userData.name.charAt(0);
         }
         
         // Setup event listeners
         function setupEventListeners() {
+            // Account menu
+            userProfile.addEventListener('click', toggleAccountMenu);
+            
+            // Account menu items
+            profileBtn.addEventListener('click', () => {
+                alert('Fitur Profil akan segera hadir!');
+                closeAccountMenu();
+            });
+            
+            settingsBtn.addEventListener('click', () => {
+                alert('Fitur Pengaturan akan segera hadir!');
+                closeAccountMenu();
+            });
+            
+            premiumBtn.addEventListener('click', () => {
+                alert('Upgrade ke Suika Premium untuk fitur eksklusif!');
+                closeAccountMenu();
+            });
+            
+            playlistsBtn.addEventListener('click', () => {
+                navigateToPage('library');
+                closeAccountMenu();
+            });
+            
+            downloadsBtn.addEventListener('click', () => {
+                alert('Fitur Download akan segera hadir!');
+                closeAccountMenu();
+            });
+            
+            statsBtn.addEventListener('click', () => {
+                showStatsModal();
+                closeAccountMenu();
+            });
+            
+            logoutBtn.addEventListener('click', () => {
+                if (confirm('Apakah Anda yakin ingin keluar?')) {
+                    alert('Anda telah keluar dari akun.');
+                    closeAccountMenu();
+                }
+            });
+            
+            // Close account menu when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!userProfile.contains(e.target) && !accountMenu.contains(e.target)) {
+                    closeAccountMenu();
+                }
+            });
+            
             // Player controls
             playPauseBtn.addEventListener('click', togglePlayPause);
             prevBtn.addEventListener('click', playPrevSong);
@@ -2922,6 +3468,294 @@
             });
         }
         
+        // Toggle account menu
+        function toggleAccountMenu() {
+            accountMenu.classList.toggle('active');
+        }
+        
+        // Close account menu
+        function closeAccountMenu() {
+            accountMenu.classList.remove('active');
+        }
+        
+        // Show stats modal
+        function showStatsModal() {
+            const modalHTML = `
+                <div class="modal-overlay" id="statsModal" style="
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    background: rgba(0, 0, 0, 0.8);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    z-index: 3000;
+                    backdrop-filter: blur(5px);
+                ">
+                    <div class="modal-content" style="
+                        background: rgba(26, 26, 46, 0.95);
+                        border-radius: 20px;
+                        padding: 30px;
+                        max-width: 500px;
+                        width: 90%;
+                        max-height: 80vh;
+                        overflow-y: auto;
+                    ">
+                        <div class="modal-header" style="
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: center;
+                            margin-bottom: 25px;
+                        ">
+                            <h2 style="
+                                font-size: 1.8rem;
+                                font-weight: 700;
+                                background: var(--gradient);
+                                -webkit-background-clip: text;
+                                background-clip: text;
+                                color: transparent;
+                            ">Statistik Anda</h2>
+                            <button id="closeStatsModal" style="
+                                background: transparent;
+                                border: none;
+                                color: var(--gray);
+                                font-size: 1.5rem;
+                                cursor: pointer;
+                            "><i class="fas fa-times"></i></button>
+                        </div>
+                        <div class="modal-body">
+                            <div style="
+                                display: grid;
+                                grid-template-columns: repeat(2, 1fr);
+                                gap: 20px;
+                                margin-bottom: 30px;
+                            ">
+                                <div style="
+                                    background: rgba(255, 255, 255, 0.05);
+                                    border-radius: 15px;
+                                    padding: 20px;
+                                    text-align: center;
+                                ">
+                                    <div style="
+                                        font-size: 2.5rem;
+                                        font-weight: 700;
+                                        background: var(--gradient);
+                                        -webkit-background-clip: text;
+                                        background-clip: text;
+                                        color: transparent;
+                                    ">${userData.stats.songsPlayed}</div>
+                                    <div style="
+                                        color: var(--gray);
+                                        font-size: 0.9rem;
+                                        margin-top: 5px;
+                                    ">Lagu Diputar</div>
+                                </div>
+                                <div style="
+                                    background: rgba(255, 255, 255, 0.05);
+                                    border-radius: 15px;
+                                    padding: 20px;
+                                    text-align: center;
+                                ">
+                                    <div style="
+                                        font-size: 2.5rem;
+                                        font-weight: 700;
+                                        background: var(--gradient);
+                                        -webkit-background-clip: text;
+                                        background-clip: text;
+                                        color: transparent;
+                                    ">${userData.stats.playlists}</div>
+                                    <div style="
+                                        color: var(--gray);
+                                        font-size: 0.9rem;
+                                        margin-top: 5px;
+                                    ">Playlist</div>
+                                </div>
+                                <div style="
+                                    background: rgba(255, 255, 255, 0.05);
+                                    border-radius: 15px;
+                                    padding: 20px;
+                                    text-align: center;
+                                ">
+                                    <div style="
+                                        font-size: 2.5rem;
+                                        font-weight: 700;
+                                        background: var(--gradient);
+                                        -webkit-background-clip: text;
+                                        background-clip: text;
+                                        color: transparent;
+                                    ">${userData.stats.listeningTime}</div>
+                                    <div style="
+                                        color: var(--gray);
+                                        font-size: 0.9rem;
+                                        margin-top: 5px;
+                                    ">Total Mendengarkan</div>
+                                </div>
+                                <div style="
+                                    background: rgba(255, 255, 255, 0.05);
+                                    border-radius: 15px;
+                                    padding: 20px;
+                                    text-align: center;
+                                ">
+                                    <div style="
+                                        font-size: 2.5rem;
+                                        font-weight: 700;
+                                        background: var(--gradient);
+                                        -webkit-background-clip: text;
+                                        background-clip: text;
+                                        color: transparent;
+                                    ">${listenHistory.length}</div>
+                                    <div style="
+                                        color: var(--gray);
+                                        font-size: 0.9rem;
+                                        margin-top: 5px;
+                                    ">Lagu dalam Riwayat</div>
+                                </div>
+                            </div>
+                            
+                            <div style="
+                                background: rgba(255, 255, 255, 0.05);
+                                border-radius: 15px;
+                                padding: 20px;
+                                margin-bottom: 20px;
+                            ">
+                                <h3 style="
+                                    font-size: 1.2rem;
+                                    margin-bottom: 15px;
+                                    color: var(--light);
+                                ">Genre Favorit</h3>
+                                <div style="
+                                    display: flex;
+                                    flex-direction: column;
+                                    gap: 10px;
+                                ">
+                                    ${getFavoriteGenres()}
+                                </div>
+                            </div>
+                            
+                            <div style="
+                                background: rgba(255, 255, 255, 0.05);
+                                border-radius: 15px;
+                                padding: 20px;
+                            ">
+                                <h3 style="
+                                    font-size: 1.2rem;
+                                    margin-bottom: 15px;
+                                    color: var(--light);
+                                ">Aktivitas Terbaru</h3>
+                                <div style="
+                                    display: flex;
+                                    flex-direction: column;
+                                    gap: 10px;
+                                ">
+                                    ${getRecentActivity()}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            document.body.insertAdjacentHTML('beforeend', modalHTML);
+            
+            document.getElementById('closeStatsModal').addEventListener('click', () => {
+                document.getElementById('statsModal').remove();
+            });
+            
+            document.getElementById('statsModal').addEventListener('click', (e) => {
+                if (e.target.id === 'statsModal') {
+                    document.getElementById('statsModal').remove();
+                }
+            });
+        }
+        
+        // Get favorite genres
+        function getFavoriteGenres() {
+            const genreCount = {};
+            listenHistory.forEach(song => {
+                genreCount[song.category] = (genreCount[song.category] || 0) + 1;
+            });
+            
+            const sortedGenres = Object.entries(genreCount)
+                .sort((a, b) => b[1] - a[1])
+                .slice(0, 5);
+            
+            if (sortedGenres.length === 0) {
+                return '<div style="color: var(--gray); text-align: center; padding: 20px;">Belum ada data genre</div>';
+            }
+            
+            return sortedGenres.map(([genre, count]) => {
+                const percentage = (count / listenHistory.length * 100).toFixed(1);
+                return `
+                    <div>
+                        <div style="
+                            display: flex;
+                            justify-content: space-between;
+                            margin-bottom: 5px;
+                            font-size: 0.9rem;
+                        ">
+                            <span>${genre.charAt(0).toUpperCase() + genre.slice(1)}</span>
+                            <span>${percentage}%</span>
+                        </div>
+                        <div style="
+                            height: 6px;
+                            background: rgba(255, 255, 255, 0.1);
+                            border-radius: 3px;
+                            overflow: hidden;
+                        ">
+                            <div style="
+                                height: 100%;
+                                width: ${percentage}%;
+                                background: var(--gradient);
+                                border-radius: 3px;
+                            "></div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+        
+        // Get recent activity
+        function getRecentActivity() {
+            const recentHistory = listenHistory.slice(0, 3);
+            
+            if (recentHistory.length === 0) {
+                return '<div style="color: var(--gray); text-align: center; padding: 20px;">Belum ada aktivitas</div>';
+            }
+            
+            return recentHistory.map(song => {
+                const timeAgo = formatHistoryTime(new Date(song.playedAt));
+                return `
+                    <div style="
+                        display: flex;
+                        align-items: center;
+                        gap: 10px;
+                        padding: 10px;
+                        background: rgba(255, 255, 255, 0.03);
+                        border-radius: 10px;
+                    ">
+                        <img src="${song.img}" style="
+                            width: 40px;
+                            height: 40px;
+                            border-radius: 8px;
+                            object-fit: cover;
+                        ">
+                        <div style="flex: 1;">
+                            <div style="
+                                font-weight: 500;
+                                font-size: 0.9rem;
+                            ">${song.title}</div>
+                            <div style="
+                                color: var(--gray);
+                                font-size: 0.8rem;
+                            ">${song.artist} • ${timeAgo}</div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+        
         // Tampilkan lagu dalam grid
         function displaySongs(songs, container, type) {
             container.innerHTML = '';
@@ -3044,6 +3878,11 @@
             
             // Tambahkan ke recent plays
             addToRecentPlays(song);
+            
+            // Update stats
+            userData.stats.songsPlayed++;
+            saveToLocalStorage();
+            updateUserData();
             
             loadSong(currentSongIndex);
             
@@ -3221,15 +4060,15 @@
         // Acak
         function toggleShuffle() {
             isShuffled = !isShuffled;
-            shuffleBtn.style.color = isShuffled ? 'var(--primary)' : 'var(--light)';
-            fullscreenShuffleBtn.style.color = isShuffled ? 'var(--primary)' : 'var(--light)';
+            shuffleBtn.classList.toggle('active', isShuffled);
+            fullscreenShuffleBtn.classList.toggle('active', isShuffled);
         }
         
         // Ulangi
         function toggleRepeat() {
             isRepeated = !isRepeated;
-            repeatBtn.style.color = isRepeated ? 'var(--primary)' : 'var(--light)';
-            fullscreenRepeatBtn.style.color = isRepeated ? 'var(--primary)' : 'var(--light)';
+            repeatBtn.classList.toggle('active', isRepeated);
+            fullscreenRepeatBtn.classList.toggle('active', isRepeated);
         }
         
         // Update progress bar
