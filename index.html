@@ -37,6 +37,213 @@
             overflow-x: hidden;
         }
 
+        /* ========== SPLASH SCREEN ========== */
+        .splash-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--dark);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            pointer-events: none;
+        }
+
+        .splash-screen.fade-out {
+            opacity: 0;
+        }
+
+        .splash-content {
+            text-align: center;
+            transform: translateY(0);
+            animation: floatIn 1s ease-out;
+        }
+
+        .splash-logo-wrapper {
+            margin-bottom: 30px;
+        }
+
+        .splash-icon {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 20px;
+            background: var(--gradient);
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: var(--light);
+            box-shadow: 0 20px 40px rgba(123, 67, 151, 0.3);
+            animation: pulse 2s infinite;
+            position: relative;
+        }
+
+        .splash-icon::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            background: var(--gradient);
+            border-radius: 35px;
+            opacity: 0.3;
+            animation: ripple 2s infinite;
+        }
+
+        .splash-icon i {
+            animation: spin 8s linear infinite;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+        }
+
+        .splash-logo-text {
+            font-size: 3rem;
+            font-weight: 800;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: 2px;
+            text-shadow: 0 4px 15px rgba(123, 67, 151, 0.3);
+            animation: pulse 2s infinite;
+        }
+
+        .splash-loader {
+            width: 200px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            margin: 30px auto 20px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .splash-progress {
+            width: 0%;
+            height: 100%;
+            background: var(--gradient);
+            border-radius: 4px;
+            animation: progress 2.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+            position: relative;
+        }
+
+        .splash-progress::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 20px;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: shimmer 1.5s infinite;
+        }
+
+        .splash-footer {
+            color: var(--gray);
+            font-size: 1rem;
+            font-weight: 300;
+            letter-spacing: 2px;
+            opacity: 0;
+            animation: fadeIn 1s ease-out 1.5s forwards;
+            text-transform: uppercase;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.05);
+                opacity: 0.9;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        @keyframes ripple {
+            0% {
+                transform: scale(1);
+                opacity: 0.3;
+            }
+            50% {
+                transform: scale(1.1);
+                opacity: 0.1;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 0.3;
+            }
+        }
+
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes progress {
+            0% {
+                width: 0%;
+            }
+            20% {
+                width: 20%;
+            }
+            40% {
+                width: 45%;
+            }
+            60% {
+                width: 65%;
+            }
+            80% {
+                width: 85%;
+            }
+            100% {
+                width: 100%;
+            }
+        }
+
+        @keyframes shimmer {
+            0% {
+                transform: translateX(-100%);
+            }
+            100% {
+                transform: translateX(200%);
+            }
+        }
+
+        @keyframes floatIn {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
         /* ========== FIXED LAYOUT ========== */
         .app-container {
             display: flex;
@@ -45,6 +252,17 @@
             position: relative;
             width: 100%;
             overflow-x: hidden;
+            opacity: 0;
+            animation: appFadeIn 1s ease-out 2.5s forwards;
+        }
+
+        @keyframes appFadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
         }
 
         /* Sidebar - Fixed Width */
@@ -1391,6 +1609,22 @@
     </style>
 </head>
 <body>
+    <!-- Splash Screen -->
+    <div class="splash-screen" id="splashScreen">
+        <div class="splash-content">
+            <div class="splash-logo-wrapper">
+                <div class="splash-icon">
+                    <i class="fas fa-music"></i>
+                </div>
+                <div class="splash-logo-text">Suika Player</div>
+            </div>
+            <div class="splash-loader">
+                <div class="splash-progress"></div>
+            </div>
+            <div class="splash-footer">Nikmati Lagu Hanya Di Suika Player</div>
+        </div>
+    </div>
+
     <!-- Account Menu -->
     <div class="account-menu" id="accountMenu">
         <div class="account-header">
@@ -1531,7 +1765,7 @@
     </div>
 
     <!-- App Container -->
-    <div class="app-container">
+    <div class="app-container" id="appContainer">
         <!-- Sidebar -->
         <aside class="sidebar" id="sidebar">
             <div class="logo">
@@ -3615,23 +3849,23 @@
 },
 {
   "id": 165,
-  "title": "Kapan Terakhir Kali Kamu Dapat Tertidur Tenang",
-  "artist": "Tulus",
-  "album": "Manusia",
-  "src": "https://raw.githubusercontent.com/SuikaRyp/Penyimpanan-Lagu/main/audio/example_track_5.mp3",
-  "img": "https://raw.githubusercontent.com/SuikaRyp/Penyimpanan-Lagu/main/images/example_image_5.jpg",
-  "duration": "5:20",
+  "title": "Bahagia Lagi",
+  "artist": "Piece Kota",
+  "album": "Lagu Galau",
+  "src": "https://raw.githubusercontent.com/SuikaRyp/Penyimpanan-Lagu/main/audio/1771160824810_Bahagia_Lagi_-_Piche_Kota.mp3",
+  "img": "https://raw.githubusercontent.com/SuikaRyp/Penyimpanan-Lagu/main/images/1771160960157_image_1771160960157.jpg",
+  "duration": "3:48",
   "category": "pop",
   "popular": true
 },
 {
   "id": 166,
-  "title": "Kapan Terakhir Kali Kamu Dapat Tertidur Tenang",
-  "artist": "Tulus",
-  "album": "Manusia",
-  "src": "https://raw.githubusercontent.com/SuikaRyp/Penyimpanan-Lagu/main/audio/example_track_5.mp3",
-  "img": "https://raw.githubusercontent.com/SuikaRyp/Penyimpanan-Lagu/main/images/example_image_5.jpg",
-  "duration": "5:20",
+  "title": "Message In Bottle",
+  "artist": "Tylor Swift",
+  "album": "Taylor Swift",
+  "src": "https://raw.githubusercontent.com/SuikaRyp/Penyimpanan-Lagu/main/audio/1771161478104_Taylor_Swift_Message_In_A_Bottle_Taylor_s_Version_From_The.mp3",
+  "img": "https://raw.githubusercontent.com/SuikaRyp/Penyimpanan-Lagu/main/images/1771161455394_image_1771161455394.jpg",
+  "duration": "3:46",
   "category": "pop",
   "popular": true
 },
@@ -3855,6 +4089,20 @@
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
         const resultsInfo = document.getElementById('resultsInfo');
         const searchQuery = document.getElementById('searchQuery');
+        const splashScreen = document.getElementById('splashScreen');
+        const appContainer = document.getElementById('appContainer');
+
+        // ========== SPLASH SCREEN FUNCTION ==========
+        function hideSplashScreen() {
+            setTimeout(() => {
+                splashScreen.classList.add('fade-out');
+                setTimeout(() => {
+                    splashScreen.style.display = 'none';
+                    // Ensure app is visible
+                    appContainer.style.opacity = '1';
+                }, 800);
+            }, 2500);
+        }
 
         // ========== INITIALIZATION ==========
         function initApp() {
@@ -3889,6 +4137,9 @@
             
             // Initialize empty search results carousel
             clearSearchResults();
+
+            // Hide splash screen after initialization
+            hideSplashScreen();
         }
 
         // ========== CAROUSEL DISPLAY ==========
